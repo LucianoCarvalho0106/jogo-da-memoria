@@ -4,22 +4,58 @@ let primeiraCarta  = '';
 let segundaCarta = '';
 
 const personagens = [
-    'ace.jpg',
-    'doflamingo.jpg',
-    'law.jpg',
-    'luffy.jpg',
-    'robin.jpg',
-    'roger.jpg',
-    'sanji.jpg',
-    'ussop.jpg',
-    'zoro.jpg',
-    'nami.jpg'
+    'ace',
+    'doflamingo',
+    'law',
+    'luffy',
+    'robin',
+    'roger',
+    'sanji',
+    'ussop',
+    'zoro',
+    'nami'
 ];
 
 const criarElemento = (tag,classe)=>{
     let card = document.createElement(tag);
     card.className = classe;
     return card;
+}
+
+const checarFimDeJogo = ()=>{
+  const cartasDesabilitadas = document.querySelectorAll(".desabilitar-carta");
+  if(cartasDesabilitadas.length == 20){
+    setTimeout(()=>{
+      alert("Fim de Jogo")
+    },100)
+    
+  }
+}
+
+const checarCarta = ()=>{
+  const primeiroPersonagem = primeiraCarta.getAttribute("data-personagens");
+  const segundoPersonagem = segundaCarta.getAttribute("data-personagens");
+
+  if(primeiroPersonagem === segundoPersonagem){
+    
+    primeiraCarta.firstChild.classList.add("desabilitar-carta");
+    segundaCarta.firstChild.classList.add("desabilitar-carta");
+    
+    primeiraCarta = '';
+    segundaCarta = '';
+
+    checarFimDeJogo();
+
+  }else{
+    setTimeout(()=>{
+      primeiraCarta.classList.remove('revelar-carta');
+      segundaCarta.classList.remove('revelar-carta');
+      
+    primeiraCarta = '';
+    segundaCarta = '';
+
+    },500)
+  }
 }
 
 const revelarCarta = ({ target }) => {
@@ -38,7 +74,10 @@ const revelarCarta = ({ target }) => {
       target.parentNode.classList.add('revelar-carta');
       segundaCarta = target.parentNode;
   
+      checarCarta();
     }  
+
+   
   }
 
 const criarCarta = (personagens)=>{
@@ -53,6 +92,8 @@ const criarCarta = (personagens)=>{
     frente.style.backgroundImage = `url('../images/${personagens}.jpg')`;
 
     carta.addEventListener('click', revelarCarta);
+    carta.setAttribute('data-personagens', personagens)
+
     return carta;
 }
 
@@ -70,5 +111,5 @@ const criarTodasAsCartas = ()=>{
 
   
   window.onload = ()=>{
-    criarTodasAsCartas()
+    criarTodasAsCartas();
   }
