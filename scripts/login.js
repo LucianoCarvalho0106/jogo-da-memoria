@@ -15,7 +15,7 @@ const checarNome = ({target})=>{
 
 const quandoEnviar = (e)=>{
     e.preventDefault();
-    localStorage.setItem("Jogador",nome.value);
+    localStorage.setItem("jogador",nome.value);
     window.location = "paginas/jogo.html"
 }
 

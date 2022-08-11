@@ -1,5 +1,9 @@
 const grid = document.querySelector(".grid");
 const cartas = document.querySelector(".carta");
+const jogador = document.querySelector(".jogador");
+const minutos = document.querySelector(".minutos");
+const segundos = document.querySelector(".segundos");
+
 let primeiraCarta  = '';
 let segundaCarta = '';
 
@@ -26,7 +30,7 @@ const checarFimDeJogo = ()=>{
   const cartasDesabilitadas = document.querySelectorAll(".desabilitar-carta");
   if(cartasDesabilitadas.length == 20){
     setTimeout(()=>{
-      alert("Fim de Jogo")
+      alert(`Parabéns ${jogador.innerHTML} Seu Tempo foi ${tempo.innerHTML} !`)
     },100)
     
   }
@@ -108,8 +112,26 @@ const criarTodasAsCartas = ()=>{
     })
 }
 
+let contador = ()=>{
+  setInterval(()=>{
+
+    let segundoAtual = Number(segundos.innerHTML);
+    segundos.innerHTML = ++segundoAtual ;
+   
+    let minutoAtual = Number(minutos.innerHTML);
+    if(segundoAtual > 60){
+      segundos.innerHTML = `00`
+      minutos.innerHTML = ++minutoAtual;
+      
+    }
+    
+  },1000)
+
+}
 
   
   window.onload = ()=>{
     criarTodasAsCartas();
+    jogador.innerHTML = localStorage.getItem("jogador")
+    contador();
   }
