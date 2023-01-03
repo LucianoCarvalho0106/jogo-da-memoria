@@ -29,9 +29,9 @@ const criarElemento = (tag,classe)=>{
 const checarFimDeJogo = ()=>{
   const cartasDesabilitadas = document.querySelectorAll(".desabilitar-carta");
   if(cartasDesabilitadas.length == 20){
-    setTimeout(()=>{
-      alert(`Parabéns ${jogador.innerHTML} Seu Tempo foi ${tempo.innerHTML} !`)
-    },100)
+     clearInterval(this.loop);
+     
+    alert(`Parabens ${jogador.innerHTML} seu tempo foi 0${minutos.innerHTML}: ${segundos.innerHTML}`)
     
   }
 }
